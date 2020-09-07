@@ -8,7 +8,6 @@ int memo[1000001];
 int DP(int n){
 	
 	if(memo[n] != -1){
-	//	cout << "memo n :" << n << '\n';
 		return memo[n];	
 	}
 	
@@ -21,9 +20,6 @@ int DP(int n){
 		memo[n] = min(memo[n], DP(n/2) + 1) ;
 	}
 	memo[n] = min(memo[n], DP(n-1) + 1) ;	
-	
-	
-	//cout << "n = " << n << " memo[n] = "<< memo[n] <<'\n';
 	
 	return memo[n];
 }
@@ -39,7 +35,6 @@ int main(){
 	
 	memo[0] = 0, memo[1] = 0;
 	memo[2] = 1, memo[3] = 1;
-	
 	
 	cin >> n;
 	
