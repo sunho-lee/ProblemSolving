@@ -6,11 +6,14 @@ using namespace std;
 int memo[1001];
 int p[1001];
 int function(int n){
-	if(n == 1) return p[n];
-	if(memo[n] != -1) return memo[n];
+	memo[0] = 0, memo[1] = p[1];
 	
-	memo[n] = function(n-1) + p[n];
-	cout << "n : "<< n << " memo[n] : " << memo[n] << '\n';
+	for (int i=2; i<=n; i++) {
+        for (int j=1; j<=i; j++) {
+            memo[i] = max(memo[i], memo[i-j]+p[j]);
+        }
+    }
+
 	return memo[n];
 }
 
