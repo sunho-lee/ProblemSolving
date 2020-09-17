@@ -10,6 +10,7 @@ int ans;
 int function(int n){
 
 	for(int i = 2; i <= n; i++){
+		D[i] = 1;
 		for(int j = i - 1 ; j >= 1; j--){
 			if(A[i] > A[j]){
 				D[i] = max(D[i], D[j] + 1);
