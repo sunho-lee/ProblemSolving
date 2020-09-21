@@ -1,40 +1,57 @@
 #include <iostream>
-#include <string>
-#include <stack>
+#include <cstring>
 #include <algorithm>
-#include <cmath>
 
 using namespace std;
-int A[1001][4];
-int D[1001][4];
+
+int D[10001][4];
+int P[10001][4];
+int ans = 2147483647;
+
 int function(int n){
+	
+	for(int i = 2; i<=n; i++){
+		D[i][1] = min(D[i-1][2], D[i-1][3]) + P[i][1];
+		D[i][2] = min(D[i-1][1], D[i-1][3]) + P[i][2];
+		D[i][3] = min(D[i-1][1], D[i-1][2]) + P[i][3];
+		
+	//	cout << "i = "<< i << " " << D[i][1] << " " << D[i][2] << " " << D[i][3] <<'\n'; 
+	}
+	
+	for(int i = 1; i <= n; i++){
+		ans = min(D[n][1], D[n][2]);
+		ans = min(ans, D[n][3]);
+		
+	}
 
-    for (int i = 1; i <= n; i++){
-    
-        D[i][1] = D[i-1][2] + D[i-1][3]; 
-
-    }
-    
-
+	
+	return ans;
 }
 
 int main(){
+	int n;
+	cin >> n;
+	
+	ios_base:: sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	for(int i = 1; i <= n; i++){
+		for(int j = 1; j<= 3; j++){
+			cin >> P[i][j];
+		}
+	}
+	
+	P[0][1] = 0;
+	P[0][2] = 0;
+	P[0][3] = 0;
+	D[1][1] = P[1][1];
+	D[1][2] = P[1][2];
+	D[1][3] = P[1][3];
+	
+	cout << function(n);
 
-int n;
-cin >> n;
-
-ios_base:: sync_with_stdio(false);
-cin.tie(NULL);
-cout.tie(NULL);
-
-for (int i = 1; i <= n; i++){
-    for(int j = 1; j <=3; j++){
-        cin >> D[n][j];    
-    }
+    return 0;
 
 }
 
-cout << function(n);
-
-return 0;
-}
