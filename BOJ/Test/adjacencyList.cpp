@@ -8,19 +8,11 @@
 
 using namespace std;
 /*  nodes 총 정점 개수
-    edges 입력할 간선의 개수
     출력 : 각 노드에 연결된 모든 노드를 출력한다.
-    입력 예 :4 5 
-            1 2
-            1 3
-            1 4
-            2 4
-            3 4
 */
 vector<int> adjancencyList[1001];
 int main(){
-    int nodes = 4, edges = 5;
-    
+    int nodes = 4;
 
     //간선 리스트에 푸시
     adjancencyList[1].push_back(2);
