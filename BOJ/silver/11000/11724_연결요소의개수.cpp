@@ -1,45 +1,49 @@
 #include <iostream>
-#include <string>
-#include <stack>
+#include <cstring>
 #include <algorithm>
-#include <cmath>
 #include <vector>
 
 using namespace std;
+vector<int> list[1001];
+bool visited[1001];
 
-void set(){
-    ios_base:: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+void dfs(int start){
+	visited[start] = true;
+	
+	for(int i = 0; i < list[start].size(); i++){
+		int next = list[start][i];
+		if(!visited[next]){
+			dfs(next);
+		}
+	}
 }
 
-vector<int> a[1001];
-bool check[1001];
-void dfs(int node) {
-    check[node] = true;
-    for (int i=0; i<a[node].size(); i++) {
-        int next = a[node][i];
-        if (check[next] == false) {
-            dfs(next);
-        }
-    }
-}
-int main() {
-    int n, m;
-    cin >> n >> m;
-    for (int i=0; i<m; i++) {
-        int u,v;
-        cin >> u >> v;
-        a[u].push_back(v);
-        a[v].push_back(u);
-    }
-    int components = 0;
-    for (int i=1; i<=n; i++) {
-        if (check[i] == false) {
-            dfs(i);
-            components += 1;
-        }
-    }
-    cout << components;
+int main(){
+	int n, m;
+	int component = 0;
+	scanf("%d %d", &n, &m);
+
+	for(int i = 0; i < m; i++){
+		int u, v;
+		scanf("%d %d", &u, &v);
+		list[u].push_back(v);
+		list[v].push_back(u);
+	}
+
+	for(int i = 0; i < n; i++){
+		sort(list[i].begin(), list[i].end());
+	}	
+	
+	for(int i = 1; i<=n; i++ ){
+		if(!visited[i]){
+			dfs(i);
+			component += 1;		
+		}
+	}
+	
+	printf("%d", component);
+	
     return 0;
+
 }
+
