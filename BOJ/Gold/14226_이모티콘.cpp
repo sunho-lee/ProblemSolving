@@ -22,9 +22,9 @@ int bfs(int start, int end){
 		int current_s = q.front().sec;
 		int current_c = q.front().clip;
 		q.pop();
-		
+			
 		if(current_v == end) return current_s;
-				
+	
 		if((current_v + current_c) <= MAX && current_c > 0 && !visited[current_v + current_c][current_c]){
 			visited[current_v + current_c][current_c] = true;
 			q.push({current_v + current_c, current_s + 1, current_c});
@@ -35,10 +35,10 @@ int bfs(int start, int end){
 			q.push({current_v - 1, current_s + 1, current_c});
 		}
 
-		if(current_v != current_c){
+		if(current_v != current_c && !visited[current_v][current_v]){
 			q.push({current_v, current_s + 1, current_v});	
-		} 
-	
+		} 	
+		
 	}
 	return 0;
 }
